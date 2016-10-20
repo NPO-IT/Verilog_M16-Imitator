@@ -1,3 +1,16 @@
+/m16-imit.asm.rpt
+/m16-imit.done
+/m16-imit.eda.rpt
+/m16-imit.fit.rpt
+/m16-imit.flow.rpt
+/m16-imit.map.rpt
+/m16-imit.map.smsg
+/m16-imit.tan.rpt
+/m16-imit_nativelink_simulation.rpt
+/serv_req_info.txt
+*.qws
+*.v.bak
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -45,3 +58,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/db/
+/greybox_tmp/
+/incremental_db/
+/simulation/
+/output_files/
