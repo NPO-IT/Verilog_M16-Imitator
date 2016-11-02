@@ -19,24 +19,30 @@ wire [8:0]rdArrdM4;
 wire [7:0]rdArrdM2;
 wire [6:0]rdArrdM1;
 wire getWordM16, getWordM8, getWordM4, getWordM2, getWordM1;
+wire [4:0]grpOddity;
 
 //assign Orb_M1 = clk1;
 //assign Orb_M8 = clk2;
+//assign Orb_M16 = ~Orb_M8;
+//assign Orb_M8 = ~Orb_M1;
+//assign Orb_M4 = ~Orb_M2;
+//assign Orb_M2 = ~Orb_M2;
+//assign Orb_M1 = Orb_M8;
 
 m16 frameFormer_16( .reset(aclr), .iClkOrb(clk), .iWord(wordM16), .oAddr(rdAddrM16), .oRdEn(getWordM16), .oOrbit(Orb_serial) );
 m16Filler fill16( .reset(aclr), .clk(clk100), .bufGetWord(getWordM16), .bufRdPointer(rdAddrM16), .dataWord(wordM16) );
 
-M8 frameFormer_8(	.reset(aclr), .clk(clk), .iData(wordM8), .oRdEn(getWordM8), .oAddr(rdArrdM8), .oSerial(Orb_M8) );
-m8Filler fill8( .reset(aclr), .clk(clk100), .bufGetWord(getWordM8), .bufRdPointer(rdArrdM8), .dataWord(wordM8) );
+//M8 frameFormer_8(	.reset(aclr), .clk(clk), .iData(wordM8), .oRdEn(getWordM8), .oAddr(rdArrdM8), .oSerial(Orb_M8) );
+//m8Filler fill8( .reset(aclr), .clk(clk100), .bufGetWord(getWordM8), .bufRdPointer(rdArrdM8), .dataWord(wordM8) );
 
 //M4 frameFormer_4( .reset(aclr), .clk(clk4), .iData(wordM4), .oRdEn(getWordM4), .oAddr(rdArrdM4), .oSerial(Orb_M4) );
 //m4Filler fill4( .reset(aclr), .clk(clk100), .bufGetWord(getWordM4), .bufRdPointer(rdArrdM4), .dataWord(wordM4) );
 
-M2 frameFormer_2( .reset(aclr), .clk(clk2), .iData(wordM2), .oRdEn(getWordM2), .oAddr(rdArrdM2), .oSerial(Orb_M2) );
-m2Filler fill2( .reset(aclr), .clk(clk100), .bufGetWord(getWordM2), .bufRdPointer(rdArrdM2), .dataWord(wordM2) );
+M2 frameFormer_2( .reset(aclr), .grpOddity(grpOddity), .clk(clk2), .iData(wordM2), .oRdEn(getWordM2), .oAddr(rdArrdM2), .oSerial(Orb_M2) );
+m2Filler fill2( .reset(aclr), .clk(clk100), .grpOddity(grpOddity), .bufGetWord(getWordM2), .bufRdPointer(rdArrdM2), .dataWord(wordM2) );
 
-M1 frameFormer_1( .reset(aclr), .clk(clk1), .iData(wordM1), .oRdEn(getWordM1), .oAddr(rdArrdM1), .oSerial(Orb_M1) );
-m1Filler fill1( .reset(aclr), .clk(clk100), .bufGetWord(getWordM1), .bufRdPointer(rdArrdM1), .dataWord(wordM1) );
+//M1 frameFormer_1( .reset(aclr), .clk(clk1), .iData(wordM1), .oRdEn(getWordM1), .oAddr(rdArrdM1), .oSerial(Orb_M1) );
+//m1Filler fill1( .reset(aclr), .clk(clk100), .bufGetWord(getWordM1), .bufRdPointer(rdArrdM1), .dataWord(wordM1) );
 
 
 endmodule
