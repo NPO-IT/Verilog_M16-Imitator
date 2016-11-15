@@ -3,6 +3,7 @@ module m16(
 	input iClkOrb,
 	input [11:0]iWord,
 	output reg [10:0]oAddr,
+	output [4:0]numGrp,
 	output reg oRdEn,
 	output reg oSwitch,
 	output reg oOrbit,
@@ -17,6 +18,8 @@ reg [6:0]cntFrm;
 reg cntMem;
 reg [11:0]outWord;
 reg [2:0]seq;
+
+assign numGrp = cntGrp;
 
 always@(negedge reset or posedge iClkOrb)begin
 	if(~reset)begin
