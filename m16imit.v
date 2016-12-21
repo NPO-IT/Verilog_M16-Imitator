@@ -33,8 +33,8 @@ wire [4:0]numGrp16;
 m16 frameFormer_16( .reset(aclr), .iClkOrb(clk), .iWord(wordM16), .oAddr(rdAddrM16), .numGrp(numGrp16), .oRdEn(getWordM16), .oOrbit(Orb_serial) );
 m16Filler fill16( .reset(aclr), .clk(clk100), .bufGetWord(getWordM16), .bufRdPointer(rdAddrM16), .numGrp(numGrp16), .dataWord(wordM16) );
 
-//M8 frameFormer_8(	.reset(aclr), .clk(clk), .iData(wordM8), .oRdEn(getWordM8), .oAddr(rdArrdM8), .oSerial(Orb_M8) );
-//m8Filler fill8( .reset(aclr), .clk(clk100), .bufGetWord(getWordM8), .bufRdPointer(rdArrdM8), .dataWord(wordM8) );
+M8 frameFormer_8(	.reset(aclr), .clk(clk), .iData(wordM8), .oRdEn(getWordM8), .oAddr(rdArrdM8), .oSerial(Orb_M8) );
+m8Filler fill8( .reset(aclr), .clk(clk100), .bufGetWord(getWordM8), .bufRdPointer(rdArrdM8), .dataWord(wordM8) );
 
 //M4 frameFormer_4( .reset(aclr), .clk(clk4), .iData(wordM4), .oRdEn(getWordM4), .oAddr(rdArrdM4), .oSerial(Orb_M4) );
 //m4Filler fill4( .reset(aclr), .clk(clk100), .bufGetWord(getWordM4), .bufRdPointer(rdArrdM4), .dataWord(wordM4) );
