@@ -22,16 +22,16 @@ wire getWordM16, getWordM8, getWordM4, getWordM2, getWordM1;
 wire grpOddity;
 wire [4:0]numGrp16;
 
-//assign Orb_M1 = clk1;
+assign Orb_M1 = ~Orb_M8;
 //assign Orb_M8 = clk2;
-//assign Orb_M16 = Orb_M2;
+assign Orb_M16 = Orb_M8;
 //assign Orb_M8 = Orb_M2;
 //assign Orb_M4 = Orb_M2;
 //assign Orb_M2 = ~Orb_serial;
 //assign Orb_M1 = ~Orb_M2;
 
-m16 frameFormer_16( .reset(aclr), .iClkOrb(clk), .iWord(wordM16), .oAddr(rdAddrM16), .numGrp(numGrp16), .oRdEn(getWordM16), .oOrbit(Orb_serial) );
-m16Filler fill16( .reset(aclr), .clk(clk100), .bufGetWord(getWordM16), .bufRdPointer(rdAddrM16), .numGrp(numGrp16), .dataWord(wordM16) );
+//m16 frameFormer_16( .reset(aclr), .iClkOrb(clk), .iWord(wordM16), .oAddr(rdAddrM16), .numGrp(numGrp16), .oRdEn(getWordM16), .oOrbit(Orb_serial) );
+//m16Filler fill16( .reset(aclr), .clk(clk100), .bufGetWord(getWordM16), .bufRdPointer(rdAddrM16), .numGrp(numGrp16), .dataWord(wordM16) );
 
 M8 frameFormer_8(	.reset(aclr), .clk(clk), .iData(wordM8), .oRdEn(getWordM8), .oAddr(rdArrdM8), .oSerial(Orb_M8) );
 m8Filler fill8( .reset(aclr), .clk(clk100), .bufGetWord(getWordM8), .bufRdPointer(rdArrdM8), .dataWord(wordM8) );

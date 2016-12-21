@@ -32,7 +32,7 @@ always@(negedge reset or posedge clk)begin
 						//if ((bufRdPointer == 0) || (bufRdPointer == 512)) begin
 							if(once1==0)begin
 								dat1012 <= dat1012 + 1'b1;
-								once1=1;
+								once1<=1;
 							end
 						//end
 					end
@@ -112,7 +112,10 @@ always@(negedge reset or posedge clk)begin
 						dataWord <= {1'b0, 8'd151, 3'b0};/////////////////
 					end
 					*/
-					default: dataWord <= {1'b0, 8'd0, 3'b010};
+					default: begin
+						dataWord <= {1'b0, 8'd0, 3'b010};
+						once1<=0;
+					end
 				endcase
 			end
 
