@@ -12,6 +12,7 @@ module M8(
 	output reg [11:0]oParallel,
 	output reg oValid,
 /*??????? ???????? ??? ???*/	
+	output reg [4:0]cntGrp,
 	output reg oLCB1_rq,
 	output reg oLCB2_rq,
 	output reg oLCB3_rq,
@@ -24,7 +25,7 @@ reg [1:0]cntDiv;
 reg [4:0]cntBit;
 reg [2:0]cntWrd;
 reg [6:0]cntPhr;
-reg [4:0]cntGrp;
+//reg [4:0]cntGrp;
 reg [9:0]cntMem;
 reg [1:0]cntCcl;
 wire [23:0]iDoubled;
