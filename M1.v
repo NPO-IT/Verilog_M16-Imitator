@@ -9,14 +9,15 @@ module M1(
 /*????? ???????????????? ????? ?????? ?8 ? ???????????????? ? ???????????? ?????*/	
 	output reg oSerial,
 	output reg [11:0]oParallel,
-	output reg oValid
+	output reg oValid,
+	output reg [4:0]cntGrp
 );
 
 reg [23:0]outWrd;
 reg [1:0]cntDiv;
 reg [4:0]cntBit;
 reg [6:0]cntPhr;
-reg [4:0]cntGrp;
+//reg [4:0]cntGrp;
 reg [6:0]cntMem;
 reg [1:0]cntCcl;
 wire [23:0]iDoubled;
@@ -31,8 +32,6 @@ assign iDoubled = {iData[11],iData[11],iData[10],iData[10],iData[9],iData[9],iDa
 assign oSingled = {outWrd[22], outWrd[20], outWrd[18], outWrd[16], outWrd[14], outWrd[12], outWrd[10], outWrd[8], outWrd[6], outWrd[4], outWrd[2], outWrd[0]};
 
 always@(posedge clk or negedge reset) begin
-
-
 
 if (~reset) begin // initial
 	cntDiv <= 1;

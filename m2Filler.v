@@ -3,14 +3,14 @@ module m2Filler(
 	input clk,
 	input bufGetWord,
 	input [7:0]bufRdPointer,
-	input grpOddity,
+	input [4:0]cntGrp,
 	output reg [11:0]dataWord
 );
 
 reg once2, once1, once3, once4, once5, once6;
 reg [9:0] datCnt1; 
 reg [9:0] datCnt2;
-reg [9:0] datCnt3;
+reg [7:0] datCnt3;
 reg [9:0] datCnt4;
 reg [7:0] datCnt5;
 reg [9:0] datCnt6;
@@ -37,58 +37,30 @@ always@(negedge reset or posedge clk)begin
 			if(bufGetWord) begin
 
 				case((bufRdPointer))
-					80:
-					begin	// down count a20-b12
+					1:
+					begin
+						dataWord <= {1'b0, datCnt1[9:0],1'b0};
 						if(once1==0)begin
-							if(grpOddity) begin								// нечётные группы
-								dataWord <= {1'b0, datCnt1[9:0],1'b0};
-								datCnt1 <= datCnt1 + 1'b1;
-							end
+							datCnt1 <= datCnt1 + 1'b1;
 							once1<=1;
 						end
 					end
-					248:
-					begin	// down count a20-b12
-						if(once2==0)begin
-							if(grpOddity) begin								// нечётные группы
-								dataWord <= {1'b0, datCnt2[9:0],1'b0};
+					89:
+					begin
+						dataWord <= {1'b0, datCnt2[9:0],1'b0};
+						if(once2 == 0)begin
+							if(cntGrp == 0) begin
 								datCnt2 <= datCnt2 + 1'b1;
+								once2<=1;
 							end
-							once2<=1;
 						end
 					end
-					200:
-					begin	// down count a20-b12
+					0,8,16,24,32,40,48,56,64,72,80,88,96,104,112,120,128,136,144,152,160,168,176,184,192,200,208,216,224,232,240,248:
+					begin
+						dataWord <= {1'b0, datCnt3[7:0],3'b0};
 						if(once3==0)begin
-							if(grpOddity) begin								// нечётные группы
-								dataWord <= {1'b0, datCnt3[9:0],1'b0};
-								datCnt3 <= datCnt3 + 1'b1;
-							end
+							datCnt3 <= datCnt3 + 1'b1;
 							once3<=1;
-						end
-					end
-					26,90,154,218:
-					begin
-						if(once4 == 0)begin
-							dataWord <= {1'b0, datCnt4[9:0], 1'b0};
-							datCnt4 <= datCnt4 + 1'b1;
-							once4 <= 1;
-						end
-					end
-					0:
-					begin
-						if(once5 == 0)begin
-							dataWord <= {1'b0, datCnt6[9:0], 1'b0};
-							datCnt6 <= datCnt6 + 1'b1;
-							once5 <= 1;
-						end
-					end
-					1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81,85,89,93,97,101,105,109,113,117,121,125,129,133,137,141,145,149,153,157,161,165,169,173,177,181,185,189,193,197,201,205,209,213,217,221,225,229,233,237,241,245,249,253:
-					begin
-						if(once6 == 0)begin
-							dataWord <= {1'b0, datCnt5[7:0], 3'b0};
-							datCnt5 <= datCnt5 + 1'b1;
-							once6 <= 1;
 						end
 					end
 					default: 

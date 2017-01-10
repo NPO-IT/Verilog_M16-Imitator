@@ -12,12 +12,7 @@ module M8(
 	output reg [11:0]oParallel,
 	output reg oValid,
 /*??????? ???????? ??? ???*/	
-	output reg [4:0]cntGrp,
-	output reg oLCB1_rq,
-	output reg oLCB2_rq,
-	output reg oLCB3_rq,
-	output reg oLCB4_rq,
-	output reg [4:0]oLCB_num
+	output reg [4:0]cntGrp
 );
 
 reg [23:0]outWrd;
@@ -33,15 +28,12 @@ reg [3:0]cnt1Sec;
 reg [3:0]cnt10Sec;
 reg [3:0]cnt100Sec;
 reg [3:0]cnt1000Sec;
-reg [11:0]cntLCBrq;
 wire [11:0]oSingled;
 
 assign iDoubled = {iData[11],iData[11],iData[10],iData[10],iData[9],iData[9],iData[8],iData[8],iData[7],iData[7],iData[6],iData[6],iData[5],iData[5],iData[4],iData[4],iData[3],iData[3],iData[2],iData[2],iData[1],iData[1],iData[0],iData[0]};
 assign oSingled = {outWrd[22], outWrd[20], outWrd[18], outWrd[16], outWrd[14], outWrd[12], outWrd[10], outWrd[8], outWrd[6], outWrd[4], outWrd[2], outWrd[0]};
 
 always@(posedge clk or negedge reset) begin
-
-
 
 if (~reset) begin // initial
 	cntDiv <= 1;
@@ -55,12 +47,6 @@ if (~reset) begin // initial
 	cnt10Sec <= 0;
 	cnt100Sec <= 0;
 	cnt1000Sec <= 0;
-	cntLCBrq <= 0;
-	oLCB_num <= 0;
-	oLCB1_rq <= 0;
-	oLCB2_rq <= 0;
-	oLCB3_rq <= 0;
-	oLCB4_rq <= 0;
 	oSwitch <= 0;
 	oParallel <= 0;
 	oSerial <= 0;
@@ -149,22 +135,6 @@ end else begin	// main
 			cntDiv <= 0;
 		end
 	endcase
-
-/*LCB request*/
-	cntLCBrq <= cntLCBrq + 1'b1;
-	case (cntLCBrq)
-		0: oLCB1_rq <= 1;
-		20: oLCB1_rq <= 0;
-		600: oLCB2_rq <= 1;
-		620: oLCB2_rq <= 0;
-		1200: oLCB3_rq <= 1;
-		1220: oLCB3_rq <= 0;
-		1800: oLCB4_rq <= 1;
-		1820: oLCB4_rq <= 0;
-		3021: oLCB_num <= oLCB_num + 1'b1;
-		3071: cntLCBrq <= 0;
-	endcase
-
 
 end
 end
