@@ -29,7 +29,7 @@ always@(negedge reset or posedge clk)begin
 					begin
 						dataWord <= {1'b0, dat1012[9:0],1'b1};
 						if(once1==0)begin
-							dat1012 <= dat1012 + 1'b1;
+							dat1012 <= dat1012 - 1'b1;
 							once1<=1;
 						end
 					end

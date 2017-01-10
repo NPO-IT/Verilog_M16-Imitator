@@ -41,7 +41,8 @@ always@(negedge reset or posedge clk)begin
 					begin
 						dataWord <= {1'b0, datCnt1[9:0],1'b0};
 						if(once1==0)begin
-							datCnt1 <= datCnt1 + 1'b1;
+							datCnt1 <= datCnt1 - 1'b1;
+							if(datCnt1 == 0) datCnt1 <= 300;
 							once1<=1;
 						end
 					end

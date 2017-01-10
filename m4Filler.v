@@ -30,6 +30,7 @@ always@(negedge reset or posedge clk)begin
 						dataWord <= {1'b0, cnt1[9:0],1'b1};
 						if(once1==0)begin
 							cnt1 <= cnt1 + 1'b1;
+							if(cnt1 == 500) cnt1 <= 0;
 							once1<=1;
 						end
 					end

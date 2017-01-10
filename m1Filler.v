@@ -28,6 +28,7 @@ always@(negedge reset or posedge clk)begin
 						dataWord <= {1'b0, dat1012[9:0],1'b0};
 						if(once1==0)begin
 							dat1012 <= dat1012 + 1'b1;
+							if(dat1012 == 800) dat1012 <= 0;
 							once1=1;
 						end
 					end
