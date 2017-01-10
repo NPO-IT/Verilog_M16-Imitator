@@ -39,20 +39,17 @@ always@(negedge reset or posedge clk)begin
 					end
 					594:
 					begin
+						dataWord <= {1'b0, cnt10up2[9:0], 1'b0};
 						if (once5 == 0) begin
 							if (cntGrp == 0) begin
 								cnt10up2 <= cnt10up2 + 1'b1;
-								dataWord <= {1'b0, cnt10up2[9:0], 1'b0};
 								once5 <= 1;
-							end else begin
-								dataWord <= {1'b0, 8'd0, 3'b010};
 							end
-
 						end
 					end
 					4,68,132,196,260,324,388,452,516,580,644,708,772,836,900,964,1028,1092,1156,1220,1284,1348,1412,1476,1540,1604,1668,1732,1796,1860,1924,1988:
 					begin
-						dataWord <= {1'b0, cnt8up1[7:0],1'b0};
+						dataWord <= {1'b0, cnt8up1[7:0],3'b0};
 						if(once4 == 0)begin
 							cnt8up1 <= cnt8up1 + 1'b1;
 							once4 <= 1;

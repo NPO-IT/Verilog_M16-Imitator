@@ -41,14 +41,14 @@ always@(negedge reset or posedge clk)begin
 							end
 						end
 					end
-					1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81,85,89,93,97,101,105,109,113,117,121,125:
-					begin
-						dataWord <= {1'b0, datCnt3[7:0],3'b0};
-						if(once3==0)begin
-							datCnt3 <= datCnt3 + 1'b1;
-							once3<=1;
-						end
-					end
+//					0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92,96,100,104,108,112,116,120,124:
+//					begin
+//						dataWord <= {1'b0, datCnt3[7:0],3'b0};
+//						if(once3==0)begin
+//							datCnt3 <= datCnt3 + 1'b1;
+//							once3<=1;
+//						end
+//					end
 					default: begin
 						dataWord <= {1'b0, 8'd0, 3'b010};
 						once1 <= 0;

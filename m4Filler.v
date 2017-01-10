@@ -27,7 +27,7 @@ always@(negedge reset or posedge clk)begin
 				case((bufRdPointer))
 					0:
 					begin
-						dataWord <= {1'b0, cnt1[9:0],3'b1};
+						dataWord <= {1'b0, cnt1[9:0],1'b1};
 						if(once1==0)begin
 							cnt1 <= cnt1 + 1'b1;
 							once1<=1;
@@ -35,7 +35,7 @@ always@(negedge reset or posedge clk)begin
 					end
 					149:
 					begin
-						dataWord <= {1'b0, cnt2, 1'b0};
+						dataWord <= {1'b0, cnt2[9:0], 1'b0};
 						if (once3 == 0) begin
 							once3 <= 1;
 							if (cntGrp == 0)				// on this stage = 4hz

@@ -8,7 +8,7 @@ module m8Filler(
 );
 
 reg once3, once2, once1;
-reg [7:0]dat6012, dat1;
+reg [7:0]dat1;
 reg [9:0]slow128, dat1012;
 reg [4:0]grpCnt;
 
@@ -16,7 +16,6 @@ always@(negedge reset or posedge clk)begin
 	if (~reset) begin
 		dataWord <= 0;
 		dat1012 <= 0;
-		dat6012 <= 0;
 		once1 <= 0;
 		once2 <= 0;
 		once3 <= 0;
@@ -28,7 +27,7 @@ always@(negedge reset or posedge clk)begin
 				case((bufRdPointer))
 					0:
 					begin
-						dataWord <= {1'b0, dat1012[9:0],3'b1};
+						dataWord <= {1'b0, dat1012[9:0],1'b1};
 						if(once1==0)begin
 							dat1012 <= dat1012 + 1'b1;
 							once1<=1;
@@ -36,7 +35,7 @@ always@(negedge reset or posedge clk)begin
 					end
 					297:
 					begin
-						dataWord <= {1'b0, slow128, 1'b0};
+						dataWord <= {1'b0, slow128[9:0], 1'b0};
 						if (once3 == 0) begin
 							once3 <= 1;
 							if (cntGrp == 0)				// on this stage = 4hz
